@@ -1,5 +1,4 @@
 ## User Stories
-
 ```
 > 1. As a time-pressed user
 > So that I can quickly go to web sites I regularly visit
@@ -12,7 +11,6 @@
 ```
 
 ## Database
-
 ```
 1. Connect to psql
 >> psql

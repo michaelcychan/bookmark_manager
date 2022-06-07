@@ -1,11 +1,12 @@
 # lib/bookmarks.rb
 
+require 'pg'
+
 class Bookmarks
   def self.all
-    return ["http://www.makersacademy.com",
-      "http://www.destroyallsoftware.com",
-      "http://www.google.com"
-    ]
+    connection = PG.connect(dbname: 'bookmark_manager')
+    result = connection.exec('SELECT * from bookmarks;')
+    result.map { |bookmark| bookmark["url"] }
   end
 
 end

@@ -6,8 +6,10 @@ source "https://rubygems.org"
 
 gem "rspec", "~> 3.11"
 
-gem "capybara", "~> 3.37"
+gem "capybara", "~> 3.37", group: test
 
 gem "sinatra", "~> 2.2"
 
 gem "sinatra-contrib", "~> 2.2"
+
+gem "pg", "~> 1.3", group: test
