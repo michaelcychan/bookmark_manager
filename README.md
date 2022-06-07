@@ -24,3 +24,10 @@
 4. Run the query we have saved in the file
 >> db/migrations/01_create_bookmarks_table.sql
 ```
+```
+Using PG gem to connect ruby application to the Postgre SQL database
+```
+
+```
+Setting up a testing env apart from the dev env
+```
