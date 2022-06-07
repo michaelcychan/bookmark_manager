@@ -1,0 +1,10 @@
+/* ./public/css/style.css */
+
+body {
+  background-color: lightblue;
+  font-family: verdana;
+  text-align: left;
+}
+.description {
+  font-size: 30px;
+}
