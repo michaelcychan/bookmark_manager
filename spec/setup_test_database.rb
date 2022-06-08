@@ -8,5 +8,4 @@ def setup_test_database
   p "Connecting to testing db - bookmark_manager_test"
   # truncate the testing database - bookmarks
   connection.exec('TRUNCATE bookmarks;')
-  p "Performed TRUNCATE on bookmarks table"
 end
