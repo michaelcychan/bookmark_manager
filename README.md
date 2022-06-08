@@ -47,23 +47,18 @@
 ```
 
 Using PG gem to connect ruby application to the Postgre SQL database
+
+# Additional Funcationalities```
+> 1. Adding CSS
+>
+>2. Adding <a> function to bookmark links
+>
+
+# Setting up a testing env apart from the dev env
 ```
-```
-# Additional Funcationalities
-```
-1. Adding CSS
-
-2. Adding <a> function to bookmark links
-
-```
-
-
-
-Setting up a testing env apart from the dev env
-
-> if ENV['ENVIRONMENT'] == 'test'
->   connection = PG.connect(dbname: 'bookmark_manager_test')
->  else 
->   connection = PG.connect(dbname: 'bookmark_manager')
->  end
+if ENV['ENVIRONMENT'] == 'test'
+  connection = PG.connect(dbname: 'bookmark_manager_test')
+else 
+  connection = PG.connect(dbname: 'bookmark_manager')
+end
 ```
