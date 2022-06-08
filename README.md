@@ -6,7 +6,7 @@
 
 
 > 2. As a time-pressed user
-> So that I can save a website
+> So that I can save a website for later visits
 >I would like to add the site's address and title to bookmark manager
 
 > 3. As a time-pressed user
