@@ -45,10 +45,25 @@
 4. Run the query we have saved in the file
 >> db/migrations/01_create_bookmarks_table.sql
 ```
-```
+
 Using PG gem to connect ruby application to the Postgre SQL database
 ```
+```
+# Additional Funcationalities
+```
+1. Adding CSS
+
+2. Adding <a> function to bookmark links
 
 ```
+
+
+
 Setting up a testing env apart from the dev env
+
+> if ENV['ENVIRONMENT'] == 'test'
+>   connection = PG.connect(dbname: 'bookmark_manager_test')
+>  else 
+>   connection = PG.connect(dbname: 'bookmark_manager')
+>  end
 ```

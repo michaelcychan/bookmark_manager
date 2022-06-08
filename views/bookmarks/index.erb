@@ -1,9 +1,8 @@
 <div class="bookmarks">
 
 <ul>
-
   <% @bookmarks.each do |url| %>
-  <li>  <%= url %>  </li>
+  <li><a href="<%= url %>" target="_blank">  <%= url %> </a> </li>
   <% end  %>
 </li>
 </ul>
