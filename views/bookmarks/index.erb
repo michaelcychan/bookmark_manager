@@ -1,9 +1,9 @@
-<div class="bookmarks">
+<!-- ./views/bookmarks/index.erb -->
 
-<ul>
-  <% @bookmarks.each do |bookmark| %>
-  <li><a href="<%= bookmark.url %>" target="_blank">  <%= bookmark.title %> </a> </li>
-  <% end  %>
-</li>
-</ul>
+<div class="bookmarks">
+  <ul>
+    <% @bookmarks.each do |bookmark| %>
+    <li><a href="<%= bookmark.url %>" target="_blank">  <%= bookmark.title %> </a> </li>
+    <% end  %></li>
+  </ul>
 </div>

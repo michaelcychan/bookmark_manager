@@ -26,7 +26,10 @@ class Bookmarks
     else 
       connection = PG.connect(dbname: 'bookmark_manager')
     end
-    result = connection.exec("INSERT INTO bookmarks (title, url) VALUES('#{title}', '#{url}') RETURNING id, url, title")
+    result = connection.exec_params("INSERT INTO bookmarks (title, url) VALUES($1, $2) RETURNING id, title, url;", [title, url])
+    # exec_params works against SQL injection.
+    # First part is the SQL template, with $1.. $n being variables, 
+    # second part is an array containing the variables
     Bookmarks.new(url: result[0]['url'], id: result[0]['id'], title: result[0]['title'])
   end
 
