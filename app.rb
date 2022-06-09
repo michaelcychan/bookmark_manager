@@ -31,10 +31,20 @@ class BookmarkManager < Sinatra::Base
     redirect '/bookmarks'
   end
 
+  # :id is the id inside the html (inside the <li> tag)
   delete '/bookmarks/:id' do
-    puts params
     Bookmarks.delete(id: params[:id])
     redirect ('/bookmarks')
+  end
+
+  get '/bookmarks/:id/update' do
+    @bookmark = Bookmarks.find(id: params[:id])
+    erb :'bookmarks/edit'
+  end
+
+  patch '/bookmarks/:id' do
+    Bookmarks.update(url: params[:url], title: params[:title], id: params[:id])
+    redirect('/bookmarks')
   end
 
   # # Start the server if this file is executed directly (do not change the line below)

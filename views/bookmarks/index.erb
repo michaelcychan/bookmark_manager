@@ -3,10 +3,15 @@
 <div class="bookmarks-list">
   <ul>
     <% @bookmarks.each do |bookmark| %>
+    <!-- why bookmark- before the id from database? -->
     <li class="bookmark" id="bookmark-<%= bookmark.id %>">
-      <form method='post' action="bookmarks/<%= bookmark.id %>">
+      <form method='post' action="/bookmarks/<%= bookmark.id %>">
         <input type='hidden' name='_method' value='DELETE' />
         <input type="submit" value="Delete">
+      </form>
+      <form method='GET' action="/bookmarks/<%= bookmark.id %>/update">
+        <!-- <input type='hidden' name='_method' value='DELETE' /> -->
+        <input type="submit" value="Edit">
       </form>
       <a href="<%= bookmark.url %>" target="_blank"> <%= bookmark.title %> </a>
     <% end %></li>

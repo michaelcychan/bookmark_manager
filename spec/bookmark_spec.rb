@@ -34,10 +34,33 @@ describe '.create' do
   describe '.delete' do
     it 'deletes a bookmark' do
       bookmark = Bookmarks.create(url: "http://www.makersacademy.com", title: "The Makers Academy")
-
       Bookmarks.delete(id: bookmark.id)
-
       expect(Bookmarks.all.length).to eq 0
     end
   end
+
+  describe '.update' do
+    it 'updates a bookmark' do
+      bookmark = Bookmarks.create(url: "http://www.makersacademy.com", title: "The Makers Academy")
+      expect(bookmark.title).to eq "The Makers Academy"
+
+      bookmark_new = Bookmarks.update(id: bookmark.id, title: 'Google', url: "http://www.google.com")
+      expect(bookmark_new).to be_a Bookmarks
+      expect(bookmark_new.title).to eq "Google"
+      expect(bookmark_new.url).to eq "http://www.google.com"
+    end
+  end
+
+  describe '.find' do
+    it 'finds a bookmark entry with the id' do
+      bookmark = Bookmarks.create(url: "http://www.makersacademy.com", title: "The Makers Academy")
+      result = Bookmarks.find(id: bookmark.id)
+
+      expect(result.id).to eq bookmark.id
+      expect(result.title).to eq "The Makers Academy"
+      expect(result.url).to eq "http://www.makersacademy.com"
+    end
+  end
+
+
 end
