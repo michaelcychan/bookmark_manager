@@ -3,6 +3,6 @@
 feature 'Landing page' do
   scenario 'Opens first page successfully' do
     visit('/')
-    expect(page).to have_content "Bookmark Manager"
+    expect(page).to have_content 'Bookmark Manager'
   end
 end
