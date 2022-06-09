@@ -1,9 +1,18 @@
 <!-- ./views/bookmarks/index.erb -->
 
-<div class="bookmarks">
+<div class="bookmarks-list">
   <ul>
     <% @bookmarks.each do |bookmark| %>
-    <li><a href="<%= bookmark.url %>" target="_blank">  <%= bookmark.title %> </a> </li>
-    <% end  %></li>
+    <li class="bookmark" id="bookmark-<%= bookmark.id %>">
+      <form method='post' action="bookmarks/<%= bookmark.id %>">
+        <input type='hidden' name='_method' value='DELETE' />
+        <input type="submit" value="Delete">
+      </form>
+      <a href="<%= bookmark.url %>" target="_blank"> <%= bookmark.title %> </a>
+    <% end %></li>
   </ul>
 </div>
+
+<form method='get' action='/bookmarks-new'>
+<input type="submit" value="Add">
+</form>

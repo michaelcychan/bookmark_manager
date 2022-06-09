@@ -9,8 +9,9 @@ class BookmarkManager < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  enable :sessions
-
+  enable :sessions, :method_override
+  # method_override is to allow DELETE method
+  
   # our routes would go here
   get '/' do
     erb :index
@@ -21,13 +22,19 @@ class BookmarkManager < Sinatra::Base
     erb :'bookmarks/index'
   end
 
-  get '/bookmarks/new' do
+  get '/bookmarks-new' do
     erb :'bookmarks/new'
   end
 
-  post '/bookmarks/new' do
+  post '/bookmarks-new' do
     Bookmarks.create(url: params[:url], title: params[:title])
     redirect '/bookmarks'
+  end
+
+  delete '/bookmarks/:id' do
+    puts params
+    Bookmarks.delete(id: params[:id])
+    redirect ('/bookmarks')
   end
 
   # # Start the server if this file is executed directly (do not change the line below)
