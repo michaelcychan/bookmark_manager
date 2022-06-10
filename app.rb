@@ -4,17 +4,21 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require './lib/bookmarks'
 require './lib/database_connection_setup'
+require 'uri'
+require 'sinatra/flash'
 
 class BookmarkManager < Sinatra::Base
-  configure :development do
+    configure :development do
     register Sinatra::Reloader
   end
-
+  
+  register Sinatra::Flash
   enable :sessions, :method_override
   # method_override is to allow DELETE method
-  
+
   # our routes would go here
   get '/' do
+    flash[:notice] = "Hooray, Flash is working!"
     erb :index
   end
 
@@ -28,7 +32,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/bookmarks-new' do
-    Bookmarks.create(url: params[:url], title: params[:title])
+    flash[:notice] = "Please enter a valid URL" unless Bookmarks.create(url: params[:url], title: params[:title])
     redirect '/bookmarks'
   end
 

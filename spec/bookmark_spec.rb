@@ -31,6 +31,11 @@ describe '.create' do
     expect(bookmark.title).to eq 'The Makers Academy'
   end
 
+  it 'does not create a bookmark with an invalid url' do
+    Bookmarks.create(url: "NOT/a/valid/website", title: "Not a title")
+    expect(Bookmarks.all).to be_empty
+  end
+
   describe '.delete' do
     it 'deletes a bookmark' do
       bookmark = Bookmarks.create(url: "http://www.makersacademy.com", title: "The Makers Academy")

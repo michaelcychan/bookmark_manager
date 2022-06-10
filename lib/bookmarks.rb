@@ -1,5 +1,6 @@
 # lib/bookmarks.rb
 require 'pg'
+require 'uri'
 require_relative './database_connection.rb'
 
 class Bookmarks
@@ -17,7 +18,11 @@ class Bookmarks
   end
 
   def self.create(url:, title:)
-    result = DatabaseConnection.query("INSERT INTO bookmarks (title, url) VALUES($1, $2) RETURNING id, title, url;", [title, url])
+    return false unless is_url?(url)
+    result = DatabaseConnection.query(
+      "INSERT INTO bookmarks (title, url) VALUES($1, $2) RETURNING id, title, url;", 
+      [title, url]
+    )
     # exec_params works against SQL injection.
     # First part is the SQL template, with $1.. $n being variables,
     # second part is an array containing the variables
@@ -36,5 +41,11 @@ class Bookmarks
   def self.find(id:)
     result = DatabaseConnection.query("SELECT * FROM bookmarks WHERE id = $1", [id])
     Bookmarks.new(url: result[0]['url'], id: result[0]['id'], title: result[0]['title'])
+  end
+
+  private
+
+  def self.is_url?(url)
+    url =~ /\A#{URI::regexp(['http', 'https'])}\z/
   end
 end
