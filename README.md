@@ -43,6 +43,8 @@
 
 4. Run the query we have saved in the file
 >> db/migrations/01_create_bookmarks_table.sql
+>> db/migrations/02_alter_bookmarks_table.sql
+>> db/migrations/03_create_comments_table.sql
 ```
 
 Using PG gem to connect ruby application to the Postgre SQL database

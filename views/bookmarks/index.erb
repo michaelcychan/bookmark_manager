@@ -10,11 +10,14 @@
         <input type="submit" value="Delete">
       </form>
       <form method='GET' action="/bookmarks/<%= bookmark.id %>/update">
-        <!-- <input type='hidden' name='_method' value='DELETE' /> -->
         <input type="submit" value="Edit">
       </form>
+      <form method='GET' action="/bookmarks/<%= bookmark.id %>/comments/new">
+        <input type="submit" value="Add comment">
+      </form>
       <a href="<%= bookmark.url %>" target="_blank"> <%= bookmark.title %> </a>
-    <% end %></li>
+    </li>
+    <% end %>
   </ul>
 </div>
 

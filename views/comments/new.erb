@@ -1,0 +1,7 @@
+<!-- ./views/bookmarks/comments/new.erb -->
+
+<form action="/bookmarks/<%= @bookmark.id%>/comments/" method="post">
+  <label for="comment"> Comment: </label>
+  <input name="comment" id="comment" type="text" />
+  <input type="submit" value="Submit">
+</form>
