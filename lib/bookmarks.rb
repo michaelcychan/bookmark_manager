@@ -1,6 +1,5 @@
 # lib/bookmarks.rb
 require 'pg'
-require_relative './database_connection_setup.rb'
 require_relative './database_connection.rb'
 
 class Bookmarks
@@ -38,5 +37,4 @@ class Bookmarks
     result = DatabaseConnection.query("SELECT * FROM bookmarks WHERE id = $1", [id])
     Bookmarks.new(url: result[0]['url'], id: result[0]['id'], title: result[0]['title'])
   end
-
 end
