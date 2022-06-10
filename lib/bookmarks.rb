@@ -1,4 +1,4 @@
-# lib/bookmarks.rb
+# ./lib/bookmarks.rb
 require 'pg'
 require 'uri'
 require_relative './database_connection.rb'
@@ -19,6 +19,7 @@ class Bookmarks
 
   def self.create(url:, title:)
     return false unless is_url?(url)
+
     result = DatabaseConnection.query(
       "INSERT INTO bookmarks (title, url) VALUES($1, $2) RETURNING id, title, url;", 
       [title, url]
@@ -31,6 +32,11 @@ class Bookmarks
 
   def self.delete(id:)
     DatabaseConnection.query("DELETE FROM bookmarks WHERE id = $1", [id])
+  end
+
+  def comments
+    # If the method does not take any parameters, you should not name it "self.comments"
+    DatabaseConnection.query("SELECT * FROM comments WHERE bookmark_id = $1", [id])
   end
 
   def self.update(id:, title:, url:)

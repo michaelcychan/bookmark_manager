@@ -15,7 +15,14 @@
       <form method='GET' action="/bookmarks/<%= bookmark.id %>/comments/new">
         <input type="submit" value="Add comment">
       </form>
-      <a href="<%= bookmark.url %>" target="_blank"> <%= bookmark.title %> </a>
+      <a href="<%= bookmark.url %>" target="_blank"> <%= bookmark.title %> </a> <br>
+      <div class="comments">
+        <ul>
+          <% bookmark.comments.each do |comment| %>
+            <li><%= comment['text'] %></li>
+          <% end %>
+        </ul>
+      </div>
     </li>
     <% end %>
   </ul>

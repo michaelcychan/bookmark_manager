@@ -67,5 +67,18 @@ describe '.create' do
     end
   end
 
+  describe '.comments' do
+    it 'it returns a list of comments on the bookmark' do
+      bookmark = Bookmarks.create(url: "http://www.makersacademy.com", title: "The Makers Academy")
+      DatabaseConnection.query(
+        "INSERT INTO comments (id, text, bookmark_id) VALUES($1, $2, $3)",
+        [1, 'My Coding Bootcamp', bookmark.id]
+      )
+
+      result = bookmark.comments.first['text']
+      expect(result).to eq "My Coding Bootcamp"
+    end
+  end
+
 
 end
