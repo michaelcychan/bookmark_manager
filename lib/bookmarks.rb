@@ -1,7 +1,8 @@
 # ./lib/bookmarks.rb
 require 'pg'
 require 'uri'
-require_relative './database_connection.rb'
+require_relative './database_connection'
+require_relative './comment.rb'
 
 class Bookmarks
   attr_reader :id, :url, :title
@@ -31,21 +32,29 @@ class Bookmarks
   end
 
   def self.delete(id:)
-    DatabaseConnection.query("DELETE FROM bookmarks WHERE id = $1", [id])
+    DatabaseConnection.query(
+      "DELETE FROM bookmarks WHERE id = $1",
+      [id]
+    )
   end
 
-  def comments
-    # If the method does not take any parameters, you should not name it "self.comments"
-    DatabaseConnection.query("SELECT * FROM comments WHERE bookmark_id = $1", [id])
+  def comments(comment_class = Comment)
+    comment_class.where(bookmark_id: id)
   end
 
   def self.update(id:, title:, url:)
-    result = DatabaseConnection.query("UPDATE bookmarks SET url = $1, title = $2 WHERE id = $3 RETURNING id, title, url", [url, title, id])
+    result = DatabaseConnection.query(
+      "UPDATE bookmarks SET url = $1, title = $2 WHERE id = $3 RETURNING id, title, url",
+      [url, title, id]
+    )
     Bookmarks.new(url: result[0]['url'], id: result[0]['id'], title: result[0]['title'])
   end
 
   def self.find(id:)
-    result = DatabaseConnection.query("SELECT * FROM bookmarks WHERE id = $1", [id])
+    result = DatabaseConnection.query(
+      "SELECT * FROM bookmarks WHERE id = $1",
+      [id]
+    )
     Bookmarks.new(url: result[0]['url'], id: result[0]['id'], title: result[0]['title'])
   end
 

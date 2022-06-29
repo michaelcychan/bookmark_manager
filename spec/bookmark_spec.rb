@@ -23,7 +23,8 @@ end
 describe '.create' do
   it 'creates a bookmark and returns it' do
     bookmark = Bookmarks.create(url: "http://www.makersacademy.com", title: "The Makers Academy")
-    persisted_data = PG.connect(dbname: 'bookmark_manager_test').query("SELECT * FROM bookmarks WHERE id = #{bookmark.id};")
+
+    persisted_data = persisted_data(table: 'bookmarks', id: bookmark.id)
     # Unit test for Bookmark class
     expect(bookmark).to be_a Bookmarks
     expect(bookmark.id).to eq persisted_data.first['id']
@@ -67,18 +68,13 @@ describe '.create' do
     end
   end
 
+  let(:comment_class) {double(:comment_class)}
   describe '.comments' do
     it 'it returns a list of comments on the bookmark' do
       bookmark = Bookmarks.create(url: "http://www.makersacademy.com", title: "The Makers Academy")
-      DatabaseConnection.query(
-        "INSERT INTO comments (id, text, bookmark_id) VALUES($1, $2, $3)",
-        [1, 'My Coding Bootcamp', bookmark.id]
-      )
+      expect(comment_class).to receive(:where).with(bookmark_id: bookmark.id)
 
-      result = bookmark.comments.first['text']
-      expect(result).to eq "My Coding Bootcamp"
+      bookmark.comments(comment_class)
     end
   end
-
-
 end

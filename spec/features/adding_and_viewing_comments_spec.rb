@@ -12,7 +12,6 @@ feature 'Adding and viewing comments' do
     click_button "Submit"
 
     expect(current_path).to eq '/bookmarks'
-    save_and_open_page
     expect(first('.bookmark')).to have_content("A search engine")
   end
 end

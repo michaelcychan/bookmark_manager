@@ -23,6 +23,7 @@ require 'capybara/rspec'
 require 'rspec'
 require_relative './setup_test_database'
 # require 'features/web_helpers.rb'
+require_relative './database_helpers'
 
 Capybara.app = BookmarkManager
 
